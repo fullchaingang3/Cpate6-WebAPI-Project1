@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cpate6-WebAPI-Project1", "Cpate6-WebAPI-Project1\Cpate6-WebAPI-Project1.csproj", "{E064AE3E-E6CC-4A2C-B4F6-AFEC4862E6E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E064AE3E-E6CC-4A2C-B4F6-AFEC4862E6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E064AE3E-E6CC-4A2C-B4F6-AFEC4862E6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E064AE3E-E6CC-4A2C-B4F6-AFEC4862E6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E064AE3E-E6CC-4A2C-B4F6-AFEC4862E6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F645CE93-E0B3-4C35-9EA9-ADA6E945FEF3}
+	EndGlobalSection
+EndGlobal
