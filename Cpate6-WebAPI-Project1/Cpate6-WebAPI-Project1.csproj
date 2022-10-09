@@ -7,12 +7,4 @@
     <RootNamespace>Cpate6_WebAPI_Project1</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Articles Controller\" />
-    <Folder Include="Controllers\Article Controller\" />
-    <Folder Include="Controllers\Rating Controller\" />
-    <Folder Include="Controllers\Ratings Controller\" />
-    <Folder Include="Controllers\User Controllers\" />
-  </ItemGroup>
-
 </Project>
