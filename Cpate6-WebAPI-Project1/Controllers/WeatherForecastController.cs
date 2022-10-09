@@ -3,14 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cpate6_WebAPI_Project1.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
 
-        [HttpGet]
-        public string Get()
+        [HttpGet("{id}/{key}")]
+        public ActionResult<string> Get(string id, string key)
         {
-            return "Hello API World";
+            if (key != "12345")
+                return BadRequest("Bad API key");
+            else
+                return Ok("Good API key");
         }
     }
 }
