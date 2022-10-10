@@ -23,6 +23,6 @@ namespace Cpate6_WebAPI_Project1.Controllers
         public ActionResult<string> Get(int articleID, string key)
         {
             return Ok("Get ratings for Article: " + articleID + " using my key: " + key);
-        }
+        } // end of GET: /api/v1/ratings/<articleId>/<key>
     }
 }

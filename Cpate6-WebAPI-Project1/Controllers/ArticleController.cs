@@ -47,6 +47,6 @@ namespace Cpate6_WebAPI_Project1.Controllers
         public ActionResult<string> Delete(int articleID)
         {
             return Ok("Deleted article: " + articleID);
-        }
+        } // end of DELETE /api/v1/article/<articleId>/<adminkey>
     }
 }

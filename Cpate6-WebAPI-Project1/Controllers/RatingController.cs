@@ -1,4 +1,4 @@
-﻿/// File:
+﻿/// File: RatingController.cs
 /// Name: Christopher Pate
 /// Class: CITC 1317
 /// Semester: Fall 2022
@@ -24,7 +24,7 @@ namespace Cpate6_WebAPI_Project1.Controllers
         public ActionResult<string> Get(int articleID, double rate)
         {
             return Ok("Get Rating Average for articleID: " + articleID + " is " + rate);
-        }
+        } // end of GET /api/v1/rating/<articleId>/<key>?type=avg
 
         /// <summary>
         /// POST /api/v1/rating/<articleId>/<key>
@@ -36,7 +36,7 @@ namespace Cpate6_WebAPI_Project1.Controllers
         public ActionResult<double> Post([FromForm] double value)
         {
             return Ok("Post this rating: " + value);
-        }
+        } // end of POST /api/v1/rating/<articleId>/<key>
 
         /// <summary>
         /// PATCH /api/v1/rating/<ratingId>/<key>
@@ -48,7 +48,7 @@ namespace Cpate6_WebAPI_Project1.Controllers
         public ActionResult<double> Patch([FromForm] double value)
         {
             return Ok("Patch this rating: " + value);
-        }
+        } // end of PATCH /api/v1/rating/<ratingId>/<key>
 
         /// <summary>
         /// DELETE /api/v1/rating/<ratingID>/<adminkey>
@@ -60,6 +60,6 @@ namespace Cpate6_WebAPI_Project1.Controllers
         public ActionResult<string> Delete(int rating)
         {
             return Ok("Deleted rating: " + rating);
-        }
+        } // end of DELETE /api/v1/rating/<ratingID>/<adminkey>
     }
 }
