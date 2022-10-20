@@ -7,4 +7,12 @@
     <RootNamespace>Cpate6_WebAPI_Project1</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataTransfer\" />
+  </ItemGroup>
+
 </Project>
