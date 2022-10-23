@@ -1,5 +1,6 @@
-﻿using dlblair_webapi_first.Data.DataTransfer;
-using edu.northeaststate.dlblair.cDatabaseConnectivity;
+﻿using Cpate6_WebAPI_Project1.DataTransfer;
+using Cpate6_WebAPI_Project1.Models;
+using dlblair_webapi_first.Data.DataTransfer;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,28 +23,28 @@ namespace dlblair_webapi_first.BusinessLayer
         /// </summary>
         /// <param name="rating"></param>
         /// <returns>Rating</returns>
-        public static Rating ValidateRating(Rating rating)
-        {
-            rating.ValidRating = true;
-            if (rating.ArticleID == 0)
-            {                
-                rating.ValidRating = false;
-            }
+    //    public static Rating ValidateRating(Rating rating)
+    //    {
+    //        rating.ValidRating = true;
+    //        if (rating.ArticleID == 0)
+    //        {                
+    //            rating.ValidRating = false;
+    //        }
 
-            if (rating.UserID.Length == 0)
-            {
-                rating.UserID = "User ID is not valid";
-                rating.ValidRating = false;
-            }
+    //        if (rating.UserID.Length == 0)
+    //        {
+    //            rating.UserID = "User ID is not valid";
+    //            rating.ValidRating = false;
+    //        }
 
-            if(rating.UserRating < 0.0 || rating.UserRating > 5.0)
-            {
-                rating.UserRating = 0.0F;
-                rating.ValidRating = false;
-    }
+    //        if(rating.UserRating < 0.0 || rating.UserRating > 5.0)
+    //        {
+    //            rating.UserRating = 0.0F;
+    //            rating.ValidRating = false;
+    //}
 
-            return rating;
-        }
+    //        return rating;
+    //    }
 
         /// <summary>
         /// Validate an ArticleDto object and check fields to match database

@@ -112,7 +112,7 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
                 if (rdr.Read())
                 {
                     user = new User();
-                    user.Guid = (string?)rdr.GetValue(0);
+                    user.UserGUID = (string?)rdr.GetValue(0);
                     user.Email = (string?)rdr.GetValue(1);
                     user.FirstName = (string?)rdr.GetValue(2);
                     user.LastName = (string?)rdr.GetValue(3);
@@ -191,7 +191,7 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
                 if (rdr.Read())
                 {
                     user = new User();
-                    user.Guid = (string?)rdr.GetValue(0);
+                    user.UserGUID = (string?)rdr.GetValue(0);
                     user.Email = (string?)rdr.GetValue(1);
 
                     user.FirstName = (string?)rdr.GetValue(2);
@@ -260,7 +260,7 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
                 while (rdr.Read())
                 {
                     User user = new User();
-                    user.Guid = (string?)rdr.GetValue(0);
+                    user.UserGUID = (string?)rdr.GetValue(0);
                     user.Email = (string?)rdr.GetValue(1);
                     user.Password = (string?)rdr.GetValue(2);
                     user.FirstName = (string?)rdr.GetValue(3);
@@ -392,7 +392,7 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // add parameters to command, which will be passed to the stored procedure
-                cmd.Parameters.Add(new MySqlParameter("GUID", user.Guid));
+                cmd.Parameters.Add(new MySqlParameter("GUID", user.UserGUID));
                 cmd.Parameters.Add(new MySqlParameter("mail", user.Email));
                 cmd.Parameters.Add(new MySqlParameter("pass", user.Password));
                 cmd.Parameters.Add(new MySqlParameter("fname", user.FirstName));

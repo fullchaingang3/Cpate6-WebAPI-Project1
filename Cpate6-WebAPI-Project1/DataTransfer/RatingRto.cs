@@ -1,10 +1,9 @@
-﻿
-/// File: RatingRto.cs
+﻿/// File: RatingRto.cs
 /// Name: Dave Blair
 /// Class: CITC 1317
 /// Semester: Fall 2022
 /// Project: Article Jet
-namespace dlblair_webapi_first.Data.DataTransfer
+namespace Cpate6_WebAPI_Project1.DataTransfer
 {
     public class RatingRto
     {
@@ -12,7 +11,7 @@ namespace dlblair_webapi_first.Data.DataTransfer
         /// Class Properties, entity to match database table Rating
         /// </summary>
         public int ArticleID { get; set; }
-        public string? UserID { get; set; }        
+        public string? UserID { get; set; }
 
         /// <summary>
         /// Output properties for testing, mostly

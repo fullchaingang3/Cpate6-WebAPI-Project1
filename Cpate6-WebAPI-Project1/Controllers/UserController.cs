@@ -4,7 +4,12 @@
 /// Semester: Fall 2022
 /// Project: Project 1
 using Cpate6_WebAPI_Project1.DataTransfer;
+using Cpate6_WebAPI_Project1.Models;
+using dlblair_webapi_first.BusinessLayer;
+using edu.northeaststate.cpate6.cDatabaseConnectivity;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
+using UserDto = Cpate6_WebAPI_Project1.DataTransfer.UserDto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,9 +50,9 @@ namespace Cpate6_WebAPI_Project1.Controllers
         /// <returns></returns>
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult<string> PostAsUser([FromBody] string value)
+        public ActionResult<string> PostAUser([FromBody] string value)
         {
-            return Ok("Post as user: " + value);
+            return Ok("Post s user: " + value);
         } // end of POST /api/v1/user/
 
         /// <summary>
@@ -77,10 +82,41 @@ namespace Cpate6_WebAPI_Project1.Controllers
         /// </summary>
         /// <param user="user"></param>
         /// <returns></returns>
-        [HttpPost("key")]
-        public ActionResult<string> Post([FromBody] UserDto data)
+        [HttpPost]
+        public ActionResult<string> Post([FromBody] UserDto? user)
         {
-            return Ok("Return new key: " + data);
+            DataLayer dl = new DataLayer();
+            var result = dl.PostANewUserAsync(User);
+
+            if (user.Result != null)
+            {
+                if (BusLogLayer.ValidateUserDto(userDto).ValidUserDto)
+                {
+                    User user = new User();
+                    user.Email = userDto.Email;
+                    user.FirstName = userDto.FirstName;
+                    user.LastName = userDto.LastName;
+
+                    var results = dl.PostANewUserAsync(user);
+                    if (results.Result > 0)
+                    {
+                        return Ok(userDto);
+                    }
+                    else
+                    {     
+                        return BadRequest("Not successful adding user to the database.");
+                    }
+                }
+                else
+                {
+                    return BadRequest(userDto);
+                }
+            }
+            else
+            {
+                return BadRequest("User key is not valid.");
+            }
+            return Ok("Return new key: " + userDto);
         } // end of POST /api/v1/user/
     }
 }

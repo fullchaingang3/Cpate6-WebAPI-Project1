@@ -14,7 +14,7 @@ namespace Cpate6_WebAPI_Project1.Models
         /// <summary>
         /// This is an entity class for the JetUser table in the database
         /// </summary>
-        public string? Guid { get; set; }
+        public string? UserGUID { get; set; }
         public string? Email{get; set; }
         public string? Password{get; set; }
         public string? FirstName{get; set; }
@@ -30,7 +30,7 @@ namespace Cpate6_WebAPI_Project1.Models
         
         public override string? ToString()
         {
-            return "Guid: " + Guid + " Email: " + Email + " Password: " + Password + " FIrstName: " + FirstName + " LastName: " + LastName + " IsActive " + IsActive + " LevelID " + LevelID;
+            return "Guid: " + UserGUID + " Email: " + Email + " Password: " + Password + " FIrstName: " + FirstName + " LastName: " + LastName + " IsActive " + IsActive + " LevelID " + LevelID;
         }
     }
 }

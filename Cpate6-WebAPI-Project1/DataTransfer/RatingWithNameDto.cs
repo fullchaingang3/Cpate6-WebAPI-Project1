@@ -1,4 +1,4 @@
-﻿namespace dlblair_webapi_first.Data.DataTransfer
+﻿namespace Cpate6_WebAPI_Project1.DataTransfer
 {
     public class RatingWithNameDto
     {
