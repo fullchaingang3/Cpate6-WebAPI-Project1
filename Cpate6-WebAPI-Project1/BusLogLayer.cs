@@ -1,6 +1,5 @@
 ﻿using Cpate6_WebAPI_Project1.DataTransfer;
 using Cpate6_WebAPI_Project1.Models;
-using dlblair_webapi_first.Data.DataTransfer;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,28 +22,28 @@ namespace dlblair_webapi_first.BusinessLayer
         /// </summary>
         /// <param name="rating"></param>
         /// <returns>Rating</returns>
-    //    public static Rating ValidateRating(Rating rating)
-    //    {
-    //        rating.ValidRating = true;
-    //        if (rating.ArticleID == 0)
-    //        {                
-    //            rating.ValidRating = false;
-    //        }
+        //public static Rating ValidateRating(Rating rating)
+        //{
+        //    rating.ValidRating = true;
+        //    if (rating.ArticleID == 0)
+        //    {
+        //        rating.ValidRating = false;
+        //    }
 
-    //        if (rating.UserID.Length == 0)
-    //        {
-    //            rating.UserID = "User ID is not valid";
-    //            rating.ValidRating = false;
-    //        }
+        //    if (rating.UserID.Length == 0)
+        //    {
+        //        rating.UserID = "User ID is not valid";
+        //        rating.ValidRating = false;
+        //    }
 
-    //        if(rating.UserRating < 0.0 || rating.UserRating > 5.0)
-    //        {
-    //            rating.UserRating = 0.0F;
-    //            rating.ValidRating = false;
-    //}
+        //    if (rating.UserRating < 0.0 || rating.UserRating > 5.0)
+        //    {
+        //        rating.UserRating = 0.0F;
+        //        rating.ValidRating = false;
+        //    }
 
-    //        return rating;
-    //    }
+        //    return rating;
+        //}
 
         /// <summary>
         /// Validate an ArticleDto object and check fields to match database
@@ -94,13 +93,13 @@ namespace dlblair_webapi_first.BusinessLayer
                 userDto.ValidUserDto = false;
             }
 
-            if(userDto.Email.Length > 50)
+            if (userDto.Email.Length > 50)
             {
                 userDto.Email = "Email over 50 characters in length.";
                 userDto.ValidUserDto = false;
             }
-            
-            if(userDto.FirstName.Length > 50 || userDto.FirstName.Length == 0)
+
+            if (userDto.FirstName.Length > 50 || userDto.FirstName.Length == 0)
             {
                 userDto.FirstName = "First name can not be over 50 characters.";
                 userDto.ValidUserDto = false;
@@ -112,11 +111,11 @@ namespace dlblair_webapi_first.BusinessLayer
                 userDto.ValidUserDto = false;
             }
 
-            if(!isValidPassword(userDto.UserPassword) || userDto.UserPassword.Length > 50 || userDto.UserPassword.Length == 0)
+            if (!isValidPassword(userDto.Password) || userDto.Password.Length > 50 || userDto.Password.Length == 0)
             {
-                userDto.UserPassword = "Password must be at least 8 characters, contain a number, and at least one uppercase letter";
+                userDto.Password = "Password must be at least 8 characters, contain a number, and at least one uppercase letter";
                 userDto.ValidUserDto = false;
-            }                           
+            }
 
             return userDto;
         }

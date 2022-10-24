@@ -103,6 +103,7 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // add parameter to command, which will be passed to the stored procedure
+                // add parameter to command, which will be passed to the stored procedure
                 cmd.Parameters.Add(new MySqlParameter("GUID", GUID));
 
                 // execute the command which returns a data reader object
