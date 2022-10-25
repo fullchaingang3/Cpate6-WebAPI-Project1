@@ -7,9 +7,8 @@ using Cpate6_WebAPI_Project1.DataTransfer;
 using Cpate6_WebAPI_Project1.Models;
 using dlblair_webapi_first.BusinessLayer;
 using edu.northeaststate.cpate6.cDatabaseConnectivity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 using UserDto = Cpate6_WebAPI_Project1.DataTransfer.UserDto;
 
@@ -30,7 +29,16 @@ namespace Cpate6_WebAPI_Project1.Controllers
         [HttpGet("status/{key}")]
         public ActionResult<string> Get(string key)
         {
-            return Ok("Get Status key: " + key);
+            DataLayer dl = new DataLayer();
+            var results = dl.GetAUserByGUIDAsync(key);
+            if (results.Result != null)
+            {
+                return Ok(results.Result);
+            }
+            else
+            {
+                return BadRequest(key + " is not a valid user key.");
+            }
         } // end of GET /api/v1/user/status/<key>
 
         /// <summary>
@@ -183,7 +191,28 @@ namespace Cpate6_WebAPI_Project1.Controllers
         /// <param name="id"></param>
         // PATCH api/<UserController>/5
         [HttpPatch("{adminkey}")]
-        public ActionResult<string> Patch(string adminkey, [FromQuery] string status, UserDto userDto)
+        public ActionResult<string> Patch(string adminkey, [FromQuery] string status)
+        {
+            DataLayer dl = new DataLayer();
+            Task<User> User = dl.GetAUserByGUIDAsync(adminkey);
+
+            if (User.Result != null && User.Result.IsActive == true && User.Result.LevelID <= 2)
+            {
+                 return BadRequest();
+            }
+            else
+            {
+                return Ok("Patch was successful.");
+            }
+        } // end of POST /api/v1/user/<adminkey>
+
+/// <summary>
+/// Delete /api/v1/user/<adminkey>/<userkey>
+/// </summary>
+/// <param name="id"></param>
+// DELETE api/<UserController>/5
+[HttpDelete("{userkey}/{adminkey}")]
+        public ActionResult<UserDto> Delete(string adminkey, string userkey, UserDto userDto)
         {
             DataLayer dl = new DataLayer();
             Task<User> User = dl.GetAUserByGUIDAsync(adminkey);
@@ -195,33 +224,7 @@ namespace Cpate6_WebAPI_Project1.Controllers
                 user1.FirstName = userDto.FirstName;
                 user1.LastName = userDto.LastName;
 
-                return Ok("Patch: user active: " + status);
-            }
-            else
-            {
-                return BadRequest("User was not patched.");
-            }
-        } // end of PATCH /api/v1/user/<adminkey>?active=<bool>
-
-        /// <summary>
-        /// Delete /api/v1/user/<adminkey>/<userkey>
-        /// </summary>
-        /// <param name="id"></param>
-        // DELETE api/<UserController>/5
-        [HttpDelete("{userkey}/{adminkey}")]
-        public ActionResult<UserDto> Delete(string adminkey, string userkey, UserDto userDto)
-        {
-            DataLayer dl = new DataLayer();
-            Task<User> User = dl.GetAUserByGUIDAsync(adminkey);
-
-            if (User.Result != null && User.Result.IsActive == true && User.Result.LevelID <= 2)
-            {
-                    User user1 = new User();
-                    user1.Email = userDto.Email;
-                    user1.FirstName = userDto.FirstName;
-                    user1.LastName = userDto.LastName;
-
-                    return BadRequest("User was not deleted.");
+                return BadRequest("User was not deleted.");
             }
             else
             {

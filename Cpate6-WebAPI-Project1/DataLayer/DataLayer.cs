@@ -78,7 +78,7 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
         /// <exception cref="Exception"></exception>
         public async Task<User>? GetAUserByGUIDAsync(string? GUID)
         {
-
+            
             User? user = null;
 
             try
