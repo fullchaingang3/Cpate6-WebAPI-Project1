@@ -183,25 +183,41 @@ namespace Cpate6_WebAPI_Project1.Controllers
         /// <param name="id"></param>
         // PATCH api/<UserController>/5
         [HttpPatch("{adminkey}")]
-        public ActionResult<string> Patch(string adminkey, [FromQuery] string status, UserDto userDto)
+        public ActionResult<string> Patch(string adminkey, [FromQuery] bool status, UserDto userDto)
         {
             DataLayer dl = new DataLayer();
-            Task<User> User = dl.GetAUserByGUIDAsync(adminkey);
+            Task<User> user = dl.GetAUserByGUIDAsync(adminkey);
 
-            if (User.Result != null && User.Result.IsActive == true && User.Result.LevelID <= 2)
+            if (user.Result != null && user.Result.IsActive == true && user.Result.LevelID <= 2)
             {
                 User user1 = new User();
+                //user1.UserGUID = userDto.GUID;
                 user1.Email = userDto.Email;
-                user1.FirstName = userDto.FirstName;
-                user1.LastName = userDto.LastName;
+                user1.Password = userDto.Password;
 
-                return Ok("Patch: user active: " + status);
+                var result = BusLogLayer.ValidateUserDto(userDto);
+                if (result.ValidUserDto == true)
+                {
+                    var userResult = dl.PutAUsersStateAsync(adminkey, status);
+                    if (userResult.Result == 1)
+                    {
+                        return Ok(userDto);
+                    }
+                    else
+                    {
+                        return BadRequest("User not patched");
+                    }
+                }
+                else
+                {
+                    return BadRequest("User not patched");
+                }
             }
             else
             {
-                return BadRequest("User was not patched.");
+                return Ok("Patch was successful.");
             }
-        } // end of PATCH /api/v1/user/<adminkey>?active=<bool>
+        } // end of POST /api/v1/user/<adminkey>
 
         /// <summary>
         /// Delete /api/v1/user/<adminkey>/<userkey>
