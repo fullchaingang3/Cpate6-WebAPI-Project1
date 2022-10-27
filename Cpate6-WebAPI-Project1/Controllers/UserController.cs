@@ -1,4 +1,4 @@
-﻿/// File: UserControllers.cs
+/// File: UserControllers.cs
 /// Name: Christopher Pate
 /// Class: CITC 1317
 /// Semester: Fall 2022
