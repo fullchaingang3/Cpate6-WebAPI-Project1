@@ -1,4 +1,5 @@
 ﻿using CDatabaseConnectivity.DataLayer;
+using Cpate6_WebAPI_Project1.DataTransfer;
 using Cpate6_WebAPI_Project1.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
@@ -1435,6 +1436,11 @@ namespace edu.northeaststate.cpate6.cDatabaseConnectivity
             return userLevels;
 
         } // end GetAllUserLevelsAsync
+
+        internal object PutAUsersStateAsync(UserDto userDto, bool status)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     } // end class DataLayer

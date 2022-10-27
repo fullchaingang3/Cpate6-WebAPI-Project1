@@ -3,11 +3,9 @@
 /// Class: CITC 1317
 /// Semester: Fall 2022
 /// Project: Project 1
-using Cpate6_WebAPI_Project1.DataTransfer;
 using Cpate6_WebAPI_Project1.Models;
 using dlblair_webapi_first.BusinessLayer;
 using edu.northeaststate.cpate6.cDatabaseConnectivity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using UserDto = Cpate6_WebAPI_Project1.DataTransfer.UserDto;
@@ -191,14 +189,35 @@ namespace Cpate6_WebAPI_Project1.Controllers
         /// <param name="id"></param>
         // PATCH api/<UserController>/5
         [HttpPatch("{adminkey}")]
-        public ActionResult<string> Patch(string adminkey, [FromQuery] string status)
+        public ActionResult<string> Patch(string adminkey, [FromQuery] bool status, UserDto userDto)
         {
             DataLayer dl = new DataLayer();
-            Task<User> User = dl.GetAUserByGUIDAsync(adminkey);
+            Task<User> user = dl.GetAUserByGUIDAsync(adminkey);
 
-            if (User.Result != null && User.Result.IsActive == true && User.Result.LevelID <= 2)
+            if (user.Result != null && user.Result.IsActive == true && user.Result.LevelID <= 2)
             {
-                 return BadRequest();
+                User user1 = new User();
+                //user1.UserGUID = userDto.GUID;
+                user1.Email = userDto.Email;
+                user1.Password = userDto.Password;
+
+                var result = BusLogLayer.ValidateUserDto(userDto);
+                if (result.ValidUserDto == true)
+                {
+                    var userResult = dl.PutAUsersStateAsync(adminkey, status);
+                    if (userResult.Result == 1)
+                    {
+                        return Ok(userDto);
+                    }
+                    else
+                    {
+                        return BadRequest("User not patched");
+                    }
+                }
+                else
+                {
+                    return BadRequest("User not patched");
+                }
             }
             else
             {
