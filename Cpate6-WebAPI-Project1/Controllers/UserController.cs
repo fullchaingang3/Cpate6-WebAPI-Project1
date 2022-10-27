@@ -1,15 +1,12 @@
-﻿/// File: UserControllers.cs
+/// File: UserControllers.cs
 /// Name: Christopher Pate
 /// Class: CITC 1317
 /// Semester: Fall 2022
 /// Project: Project 1
-using Cpate6_WebAPI_Project1.DataTransfer;
 using Cpate6_WebAPI_Project1.Models;
 using dlblair_webapi_first.BusinessLayer;
 using edu.northeaststate.cpate6.cDatabaseConnectivity;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 using UserDto = Cpate6_WebAPI_Project1.DataTransfer.UserDto;
 
@@ -30,7 +27,16 @@ namespace Cpate6_WebAPI_Project1.Controllers
         [HttpGet("status/{key}")]
         public ActionResult<string> Get(string key)
         {
-            return Ok("Get Status key: " + key);
+            DataLayer dl = new DataLayer();
+            var results = dl.GetAUserByGUIDAsync(key);
+            if (results.Result != null)
+            {
+                return Ok(results.Result);
+            }
+            else
+            {
+                return BadRequest(key + " is not a valid user key.");
+            }
         } // end of GET /api/v1/user/status/<key>
 
         /// <summary>
@@ -219,12 +225,12 @@ namespace Cpate6_WebAPI_Project1.Controllers
             }
         } // end of POST /api/v1/user/<adminkey>
 
-        /// <summary>
-        /// Delete /api/v1/user/<adminkey>/<userkey>
-        /// </summary>
-        /// <param name="id"></param>
-        // DELETE api/<UserController>/5
-        [HttpDelete("{userkey}/{adminkey}")]
+/// <summary>
+/// Delete /api/v1/user/<adminkey>/<userkey>
+/// </summary>
+/// <param name="id"></param>
+// DELETE api/<UserController>/5
+[HttpDelete("{userkey}/{adminkey}")]
         public ActionResult<UserDto> Delete(string adminkey, string userkey, UserDto userDto)
         {
             DataLayer dl = new DataLayer();
@@ -232,12 +238,12 @@ namespace Cpate6_WebAPI_Project1.Controllers
 
             if (User.Result != null && User.Result.IsActive == true && User.Result.LevelID <= 2)
             {
-                    User user1 = new User();
-                    user1.Email = userDto.Email;
-                    user1.FirstName = userDto.FirstName;
-                    user1.LastName = userDto.LastName;
+                User user1 = new User();
+                user1.Email = userDto.Email;
+                user1.FirstName = userDto.FirstName;
+                user1.LastName = userDto.LastName;
 
-                    return BadRequest("User was not deleted.");
+                return BadRequest("User was not deleted.");
             }
             else
             {
